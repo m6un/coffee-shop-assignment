@@ -1,5 +1,5 @@
 import CoffeeShop from '../models/coffeeShop.js';
-import CoffeeProduct from '../models/coffeeProduct.js';
+import CoffeeProduct from '../models/CoffeeProduct.js';
 
 export const getCoffeeShops = async (
   latitude,

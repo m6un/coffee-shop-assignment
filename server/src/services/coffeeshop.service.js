@@ -1,4 +1,4 @@
-import CoffeeShop from '../models/coffeeShop.js';
+import CoffeeShop from '../models/CoffeeShop.js';
 import CoffeeProduct from '../models/CoffeeProduct.js';
 
 export const getCoffeeShops = async (

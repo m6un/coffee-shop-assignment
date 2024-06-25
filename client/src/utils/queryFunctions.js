@@ -1,7 +1,9 @@
 // Fetch featured coffee shops based on location
 export const fetchFeaturedCoffeeShops = async (latitude, longitude) => {
   const response = await fetch(
-    `${import.meta.env.VITE_BASE_URL}?latitude=${latitude}&longitude=${longitude}&isFeatured=true`,
+    `${
+      import.meta.env.VITE_BASE_URL
+    }/api?latitude=${latitude}&longitude=${longitude}&isFeatured=true`,
   );
   return response.json();
 };
@@ -15,13 +17,13 @@ export const fetchAllCoffeeShops = async (latitude, longitude, page = 0, search)
     ...(search && { search }),
   });
 
-  const response = await fetch(`${import.meta.env.VITE_BASE_URL}?${params.toString()}`);
+  const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api?${params.toString()}`);
   return response.json();
 };
 
 // Get details of a specific coffee shop by ID
 export const getCoffeeShopDetails = async (id) => {
-  const response = await fetch(`${import.meta.env.VITE_BASE_URL}/shop/${id}`);
+  const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/shop/${id}`);
   return response.json();
 };
 

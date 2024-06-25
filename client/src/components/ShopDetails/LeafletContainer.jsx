@@ -6,12 +6,24 @@ import ForkRightRoundedIcon from '@mui/icons-material/ForkRightRounded';
 import ContentCopyRoundedIcon from '@mui/icons-material/ContentCopyRounded';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import { LoadingButton } from '@mui/lab';
+import L from 'leaflet';
 
 const LeafletContainer = ({ latitude, longitude }) => {
   const [address, setAddress] = useState('');
   const [isAddressCopied, setAddressCopied] = useState(false);
   const [isDirectionLoading, setDirectionLoading] = useState(false);
   const addressCache = new Map();
+
+  // custom icon for the marker
+  const blackIcon = new L.Icon({
+    iconUrl:
+      'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
+  });
 
   // Fetch address from coordinates
   const fetchAddress = useCallback(async (lat, lon) => {
@@ -81,7 +93,7 @@ const LeafletContainer = ({ latitude, longitude }) => {
   };
 
   return (
-    <Stack direction="column" gap={2}>
+    <Stack direction="column" gap={1}>
       <Stack direction={'column'} gap={1}>
         <Typography variant="h7">Direction</Typography>
         <div
@@ -100,20 +112,19 @@ const LeafletContainer = ({ latitude, longitude }) => {
             style={{ height: '100%', width: '100%' }}
           >
             <TileLayer
-              url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
-              attribution='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              minZoom={0}
-              maxZoom={30}
-            />
-            <Marker position={[latitude, longitude]} />
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              maxZoom={19}
+            />{' '}
+            <Marker position={[latitude, longitude]} icon={blackIcon} />
           </MapContainer>
         </div>
       </Stack>
-      <Stack direction={'column'} gap={1}>
+      <Stack direction={'column'} gap={2}>
         {!address ? (
           <Skeleton variant="text" width={'70%'} height={'20.422px'} />
         ) : (
-          <Typography variant="body" color={'grey.main'} fontWeight={400}>
+          <Typography variant="body" color={'grey.main'} fontWeight={500}>
             Address: {address}
           </Typography>
         )}

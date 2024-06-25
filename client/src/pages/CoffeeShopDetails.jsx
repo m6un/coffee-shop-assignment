@@ -76,7 +76,7 @@ const CoffeeShopDetails = () => {
                   sx={{
                     alignSelf: 'flex-start',
                     position: 'absolute',
-                    top: 40,
+                    top: 30,
                     left: 10,
                     zIndex: 1,
                     padding: '6px',
